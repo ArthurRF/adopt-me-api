@@ -7,6 +7,7 @@ import cors from 'cors';
 import session from 'express-session';
 import helmet from 'helmet';
 
+import './containers'
 import routes from './routes';
 import AppError from '@shared/errors/AppError';
 
