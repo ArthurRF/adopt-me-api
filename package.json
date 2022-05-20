@@ -6,7 +6,8 @@
   "author": "ArthurRFr <arthur_fronza2011@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect=9300 --transpile-only src/server.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect=9300 --transpile-only src/server.ts",
+    "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
