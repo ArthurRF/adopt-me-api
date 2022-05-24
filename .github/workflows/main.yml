@@ -45,4 +45,4 @@ jobs:
             yarn
             npx prisma migrate deploy
             npx prisma generate
-            pm2 restart os_bichos_api
+            npx pm2 restart os_bichos_api
