@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
           source: "., !node_modules"
           target: "~/app/adopt-me-api"
 
-      - name: Update API
+      - name: Update prisma schema and restart API
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
