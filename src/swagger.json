@@ -1,0 +1,140 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OsBichos Documentation",
+    "description": "This is an API for OsBichos, an project to help dogs and cats to find a new home!",
+    "version": "1.0.0",
+    "contact": {
+      "email": "arthuur.fronza2011@gmail.com"
+    }
+  },
+  "host": "api.osbichos.net.br",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/pets": {
+      "post": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Create a pet",
+        "description": "Create a new pet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "sex": {
+                    "type": "string",
+                    "enum": ["M", "F"],
+                    "required": true
+                  },
+                  "age": {
+                    "type": "integer"
+                  },
+                  "weight": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Update a pet",
+        "description": "Update a already existent pet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "string",
+                    "enum": ["M", "F"]
+                  },
+                  "age": {
+                    "type": "integer"
+                  },
+                  "weight": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Delete a pet",
+        "description": "Delete a already existent pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Pet ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "List all pets",
+        "description": "List all the pets registered"
+      }
+    },
+    "/pets/{id}": {
+      "get": {
+        "tags": [
+          "Pets"
+        ],
+        "summary": "Get a pet",
+        "description": "Get a pet by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Pet ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
