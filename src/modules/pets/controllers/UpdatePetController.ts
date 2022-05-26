@@ -1,7 +1,6 @@
 import AppError from "@shared/errors/AppError";
 import { Request, Response } from "express";
 import { container, injectable } from "tsyringe";
-import { CreatePetService } from "../services/CreatePetService";
 import { GetPetByIdService } from "../services/GetPetByIdService";
 import { UpdatePetService } from "../services/UpdatePetService";
 

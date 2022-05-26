@@ -2,13 +2,13 @@
   "openapi": "3.0.0",
   "info": {
     "title": "OsBichos Documentation",
-    "description": "This is an API for OsBichos, an project to help dogs and cats to find a new home!",
+    "description": "This is an API for OsBichos, an project to help dogs and cats to find a new home!<hr>",
     "version": "1.0.0",
     "contact": {
       "email": "arthuur.fronza2011@gmail.com"
     }
   },
-  "host": "api.osbichos.net.br",
+  "host": "https://api.osbichos.net.br",
   "basePath": "/",
   "schemes": [
     "https"
@@ -46,6 +46,28 @@
                   "weight": {
                     "type": "number"
                   }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pet created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Pet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
                 }
               }
             }
@@ -88,6 +110,38 @@
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Pet updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Pet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
@@ -106,14 +160,69 @@
               "type": "string"
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Pet deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Pet deleted with success."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "get": {
         "tags": [
           "Pets"
         ],
         "summary": "List all pets",
-        "description": "List all the pets registered"
+        "description": "List all the pets registered",
+        "responses": {
+          "200": {
+            "description": "Pets list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/definitions/Pet"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/pets/{id}": {
@@ -133,7 +242,107 @@
               "type": "string"
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Pet found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Pet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "sex": {
+          "type": "string",
+          "required": true,
+          "enum": [
+            "F",
+            "M"
+          ]
+        },
+        "age": {
+          "type": "integer",
+          "required": false
+        },
+        "weight": {
+          "type": "number",
+          "required": false
+        },
+        "views": {
+          "type": "integer",
+          "required": true
+        },
+        "adopted": {
+          "type": "string",
+          "required": true
+        },
+        "active": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "status": {
+          "type": "integer",
+          "required": true,
+          "enum": [
+            200,
+            201,
+            400,
+            401,
+            404,
+            500
+          ]
+        }
       }
     }
   }
